@@ -40,10 +40,10 @@
                 <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled" onclick="delNode()">Delete Element</button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled">Change Node Value</button>
+                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled" onclick="changeNodeVal()">Change Node Value</button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled">Add New element</button>
+                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled" onclick="addNewElement()">Add New element</button>
             </div>
         </div>
     </div>
@@ -102,12 +102,28 @@
     function delNode() {
         let currNode = rootElement.childNodes[1];
         let removedNode = currNode.removeChild(currNode.childNodes[1]);
-        console.log(removedNode);
-        document.getElementById('final-res').innerText = "Node Deleted: " + removedNode.innerHTML;
+        document.getElementById('final-res').innerText = "Node Deleted: " + removedNode.outerHTML;
     }
 
     function changeNodeVal() {
-        
+        let nodeName = prompt("Enter Node Name(name, category, rating, jobs, freelancers, business)", "Node Name");
+        let currNode = rootElement.getElementsByTagName(nodeName)[0].childNodes[0];
+        let ogVal = currNode.nodeValue;
+        let nodeVal = prompt("Enter New Value", "new value");
+        currNode.nodeValue = nodeVal;
+        document.getElementById('final-res').innerText = "Value Changed from: " + ogVal + " to " + currNode.nodeValue;
+    }
+
+    function addNewElement() {
+        let childName = prompt("Name of the element you want to add", "element name");
+        let newElement = document.createElement(childName);
+        let nodeVal = prompt("Enter New Value", "new value");
+        let text = document.createTextNode(nodeVal);
+        newElement.appendChild(text)
+        let nodeName = prompt("Enter Node Name(name, category, rating, jobs, freelancers, business)", "Node Name");
+        let affNode = rootElement.getElementsByTagName(nodeName)[0];
+        affNode.appendChild(newElement);
+        document.getElementById('final-res').innerText = "New Element: " + affNode.innerHTML;
     }
 </script>
 </body>
