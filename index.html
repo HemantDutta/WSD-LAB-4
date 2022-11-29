@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Parser | WSD-LAB-4</title>
+    <title>WSD | Lab 4</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
 </head>
 <body>
@@ -12,37 +12,43 @@
     <div class="top-text">
         <h2>WSD LAB 4 | DOM Parser</h2>
     </div>
-    <div class="row">
-        <div class="open-file">
-            <div class="col-lg-6">
-                <label for="fileName">Enter File Name</label>
-                <input type="text" id="fileName" placeholder="file name">
+    <div class="open-file">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div id="input-field" class="d-flex flex-column">
+                    <label for="fileName" class="font-weight-bold">Enter File Name</label>
+                    <input type="text" id="fileName" placeholder="file name" class="form-control">
+                </div>
             </div>
-            <div class="col-lg-6">
-                <button type="button">Open</button>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <button type="button" class="form-control btn btn-outline-dark">Open</button>
             </div>
         </div>
     </div>
     <hr>
     <div class="file-status">
-        <span>File Status: <span id="fStatOut" class="text-primary"></span>Waiting for input</span>
+        <span>File Status: <span id="fStatOut" class="text-primary">Waiting for input</span></span>
     </div>
     <hr>
     <div class="action-buttons">
         <div class="row">
-            <div class="col-lg-3">
-                <button>Delete Block</button>
+            <div class="col-lg-3 col-md-6 col-sm-12 p-2">
+                <button class="btn btn-outline-dark form-control">Delete Block</button>
             </div>
-            <div class="col-lg-3">
-                <button>Delete Element</button>
+            <div class="col-lg-3 col-md-6 col-sm-12 p-2">
+                <button class="btn btn-outline-dark form-control">Delete Element</button>
             </div>
-            <div class="col-lg-3">
-                <button>Change Node Value</button>
+            <div class="col-lg-3 col-md-6 col-sm-12 p-2">
+                <button class="btn btn-outline-dark form-control">Change Node Value</button>
             </div>
-            <div class="col-lg-3">
-                <button>Add New element</button>
+            <div class="col-lg-3 col-md-6 col-sm-12 p-2">
+                <button class="btn btn-outline-dark form-control">Add New element</button>
             </div>
         </div>
+    </div>
+    <hr>
+    <div class="final-result">
+        <span>Response: <span id="final-res">Press a button to get a response</span></span>
     </div>
 </div>
 <!--Scripts-->
