@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WSD | Lab 4</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<div class="container p-5">
+<div class="container p-5 main-cont">
     <div class="top-text">
         <h2>WSD LAB 4 | DOM Parser</h2>
     </div>
@@ -21,38 +22,93 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <button type="button" class="form-control btn btn-outline-dark">Open</button>
+                <button type="button" class="form-control btn btn-outline-dark" onclick="fileOpen()">Open</button>
             </div>
         </div>
     </div>
     <hr>
-    <div class="file-status">
+    <div class="file-status text-center">
         <span>File Status: <span id="fStatOut" class="text-primary">Waiting for input</span></span>
     </div>
     <hr>
     <div class="action-buttons">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control">Delete Block</button>
+                <button class="btn btn-outline-dark form-control action_buttons" onclick="delBlock()" disabled="disabled">Delete Block</button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control">Delete Element</button>
+                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled" onclick="delNode()">Delete Element</button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control">Change Node Value</button>
+                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled">Change Node Value</button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-                <button class="btn btn-outline-dark form-control">Add New element</button>
+                <button class="btn btn-outline-dark form-control action_buttons" disabled="disabled">Add New element</button>
             </div>
         </div>
     </div>
     <hr>
-    <div class="final-result">
+    <div class="final-result text-center">
         <span>Response: <span id="final-res">Press a button to get a response</span></span>
     </div>
 </div>
 <!--Scripts-->
 <script src="assets/js/jquery-3.6.0.js"></script>
 <script src="assets/js/bootstrap.js"></script>
+<script>
+
+    let rootElement;
+    let fileName = document.getElementById('fileName');
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                document.getElementById('fStatOut').innerText = "File Opened!"
+                document.getElementById('fStatOut').classList.remove("text-primary")
+                document.getElementById('fStatOut').classList.remove("text-danger")
+                document.getElementById('fStatOut').classList.add("text-success")
+                document.querySelectorAll('.action_buttons').forEach(e => {
+                        e.removeAttribute("disabled");
+                    }
+                )
+                console.log(this);
+                rootElement = this.responseXML.documentElement;
+            }
+            if (this.status == 404) {
+                document.getElementById('fStatOut').innerText = "File Not Found! Try Again!"
+                document.getElementById('fStatOut').classList.remove("text-primary")
+                document.getElementById('fStatOut').classList.remove("text-success")
+                document.getElementById('fStatOut').classList.add("text-danger")
+                document.querySelectorAll('.action_buttons').forEach(e => {
+                        e.setAttribute("disabled", "disabled");
+                    }
+                )
+            }
+        }
+    };
+
+    function fileOpen() {
+        console.log("Check: ", fileName.value)
+        xhttp.open("GET", `${fileName.value}.xml`, true);
+        xhttp.send();
+    }
+
+    function delBlock() {
+        let removedBlock = rootElement.removeChild(rootElement.childNodes[1]); //To understand why we have used 1 instead of zero, go to console and type rootElement.childNodes
+        document.getElementById('final-res').innerText = "Block Deleted: " + removedBlock.innerHTML;
+    }
+
+    function delNode() {
+        let currNode = rootElement.childNodes[1];
+        let removedNode = currNode.removeChild(currNode.childNodes[1]);
+        console.log(removedNode);
+        document.getElementById('final-res').innerText = "Node Deleted: " + removedNode.innerHTML;
+    }
+
+    function changeNodeVal() {
+        
+    }
+</script>
 </body>
 </html>
