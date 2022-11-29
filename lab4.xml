@@ -11,14 +11,4 @@
         <category>Android Developer</category>
         <rating>5</rating>
     </freelancers>
-    <business>
-        <name>TCS</name>
-        <jobs>10</jobs>
-        <rating>5</rating>
-    </business>
-    <business>
-        <name>Accenture</name>
-        <jobs>5</jobs>
-        <rating>4</rating>
-    </business>
 </users>
