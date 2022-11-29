@@ -81,8 +81,8 @@
                         e.removeAttribute("disabled");
                     }
                 )
-                displayXML(this);
                 rootElement = this.responseXML.documentElement;
+                displayXML(rootElement);
             }
             if (this.status == 404) {
                 document.getElementById('fStatOut').innerText = "File Not Found! Try Again!"
@@ -97,9 +97,9 @@
         }
     };
 
-    function displayXML(xml) {
+    function displayXML() {
         let i;
-        let xmlDoc = xml.responseXML;
+        let xmlDoc = rootElement;
         let table = `<tr><th>Name</th><th>Category</th><th>Rating</th></tr>`;
         let element = xmlDoc.getElementsByTagName('freelancers');
 
@@ -121,12 +121,14 @@
     function delBlock() {
         let removedBlock = rootElement.removeChild(rootElement.childNodes[1]); //To understand why we have used 1 instead of zero, go to console and type rootElement.childNodes
         document.getElementById('final-res').innerText = "Block Deleted: " + removedBlock.innerHTML;
+        displayXML();
     }
 
     function delNode() {
         let currNode = rootElement.childNodes[1];
         let removedNode = currNode.removeChild(currNode.childNodes[1]);
         document.getElementById('final-res').innerText = "Node Deleted: " + removedNode.outerHTML;
+        displayXML();
     }
 
     function changeNodeVal() {
@@ -136,6 +138,7 @@
         let nodeVal = prompt("Enter New Value", "new value");
         currNode.nodeValue = nodeVal;
         document.getElementById('final-res').innerText = "Value Changed from: " + ogVal + " to " + currNode.nodeValue;
+        displayXML();
     }
 
     function addNewElement() {
@@ -148,6 +151,7 @@
         let affNode = rootElement.getElementsByTagName(nodeName)[0];
         affNode.appendChild(newElement);
         document.getElementById('final-res').innerText = "New Element: " + affNode.innerHTML;
+        displayXML();
     }
 </script>
 </body>
