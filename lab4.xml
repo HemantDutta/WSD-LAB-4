@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<users>
+    <freelancers>
+        <name>Hemant</name>
+        <category>Web Developer</category>
+        <rating>5</rating>
+    </freelancers>
+    <freelancers>
+        <name>Piyush</name>
+        <category>Android Developer</category>
+        <rating>5</rating>
+    </freelancers>
+    <business>
+        <name>TCS</name>
+        <jobs>10</jobs>
+        <rating>5</rating>
+    </business>
+    <business>
+        <name>Accenture</name>
+        <jobs>5</jobs>
+        <rating>4</rating>
+    </business>
+</users>
