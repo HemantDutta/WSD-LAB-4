@@ -65,7 +65,7 @@
 <script src="assets/js/jquery-3.6.0.js"></script>
 <script src="assets/js/bootstrap.js"></script>
 <script>
-
+    let k = 1;
     let rootElement;
     let fileName = document.getElementById('fileName');
 
@@ -119,14 +119,19 @@
     }
 
     function delBlock() {
-        let removedBlock = rootElement.removeChild(rootElement.childNodes[1]); //To understand why we have used 1 instead of zero, go to console and type rootElement.childNodes
+        let removedBlock = rootElement.removeChild(rootElement.childNodes[k]); //To understand why we have used 1 instead of zero, go to console and type rootElement.childNodes
         document.getElementById('final-res').innerText = "Block Deleted: " + removedBlock.innerHTML;
         displayXML();
+
+        if(k<2){
+            k++;
+        }
     }
 
     function delNode() {
-        let currNode = rootElement.childNodes[1];
-        let removedNode = currNode.removeChild(currNode.childNodes[1]);
+        let currNode = rootElement.childNodes[k];
+        let nodeName = prompt("Enter Node Name to Delete", "node name");
+        let removedNode = currNode.removeChild(currNode.getElementsByTagName(nodeName)[0]);
         document.getElementById('final-res').innerText = "Node Deleted: " + removedNode.outerHTML;
         displayXML();
     }
