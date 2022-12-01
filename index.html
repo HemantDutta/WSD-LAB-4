@@ -53,12 +53,20 @@
     </div>
 </div>
 
-<div class="container d-flex justify-content-center align-items-center flex-column d-none" id="xmlRes">
-    <h1 class="d-none mt-5 text-light" id="xmlTableH1">XML File</h1>
-    <div id="xmlTable" class="d-none">
-        <table id="dataTable">
+<div class="container d-flex justify-content-around align-items-center d-none" id="xmlRes">
+    <div class="row">
+        <div class="d-flex justify-content-center flex-column align-items-center col-lg-6 col-md-6 col-sm-12">
+            <h1 class="d-none mt-5 text-light" id="xmlTableH1">XML File</h1>
+            <div id="xmlTable" class="d-none">
+                <table id="dataTable">
 
-        </table>
+                </table>
+            </div>
+        </div>
+        <div id="xmlFile" class="d-flex justify-content-center align-items-center flex-column col-lg-6 col-md-6 col-sm-12">
+            <h1 class="d-none mt-5 text-light" id="xmlFileH1">XML File</h1>
+            <span id="xmlFileData" class="d-none"></span>
+        </div>
     </div>
 </div>
 <!--Scripts-->
@@ -82,7 +90,7 @@
                     }
                 )
                 rootElement = this.responseXML.documentElement;
-                displayXML(rootElement);
+                displayXML();
             }
             if (this.status == 404) {
                 document.getElementById('fStatOut').innerText = "File Not Found! Try Again!"
@@ -100,6 +108,14 @@
     function displayXML() {
         let i;
         let xmlDoc = rootElement;
+
+        //XML File
+        document.getElementById('xmlFileH1').classList.remove("d-none")
+        document.getElementById('xmlFile').classList.remove("d-none")
+        document.getElementById('xmlFileData').classList.remove("d-none")
+        document.getElementById('xmlFileData').innerText = rootElement.innerHTML;
+
+        //XML Table
         let table = `<tr><th>Name</th><th>Category</th><th>Rating</th></tr>`;
         let element = xmlDoc.getElementsByTagName('freelancers');
 
@@ -109,6 +125,7 @@
         document.getElementById('xmlTableH1').classList.remove("d-none")
         document.getElementById('xmlTable').classList.remove("d-none")
         document.getElementById('dataTable').innerHTML = table;
+
 
     }
 
@@ -123,7 +140,7 @@
         document.getElementById('final-res').innerText = "Block Deleted: " + removedBlock.innerHTML;
         displayXML();
 
-        if(k<2){
+        if (k < 2) {
             k++;
         }
     }
